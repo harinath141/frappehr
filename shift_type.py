@@ -132,8 +132,7 @@ class ShiftType(Document):
                 0,
             )
         if (
-            cint(self.enable_early_exit_marking)
-            and out_time
+            out_time
             and out_time < logs[0].shift_end - timedelta(minutes=cint(self.early_exit_grace_period))
         ):
             early_exit = True
