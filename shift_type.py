@@ -115,11 +115,8 @@ class ShiftType(Document):
             self.working_hours_calculation_based_on,
         )
         if (
-            cint(self.enable_late_entry_marking)
-            and in_time
-            and in_time
-            > logs[0].shift_start
-            + timedelta(minutes=cint(self.late_entry_grace_period))
+            in_time
+            and in_time > logs[0].shift_start + timedelta(minutes=cint(self.late_entry_grace_period))
         ):
             late_entry = True
 
@@ -139,8 +136,7 @@ class ShiftType(Document):
         if (
             cint(self.enable_early_exit_marking)
             and out_time
-            and out_time
-            < logs[0].shift_end - timedelta(minutes=cint(self.early_exit_grace_period))
+            and out_time < logs[0].shift_end - timedelta(minutes=cint(self.early_exit_grace_period))
         ):
             early_exit = True
 
