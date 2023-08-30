@@ -119,11 +119,9 @@ class ShiftType(Document):
             and in_time > logs[0].shift_start + timedelta(minutes=cint(self.late_entry_grace_period))
         ):
             late_entry = True
-
-        late_mins = in_time - (
-            logs[0].shift_start + timedelta(minutes=cint(self.late_entry_grace_period))
-        )
-        if late_mins > 90:
+        if in_time:
+            late_mins = in_time - (logs[0].shift_start + timedelta(minutes=cint(self.late_entry_grace_period)))
+        if (late_mins > 90):
             return (
                 "Half Day",
                 total_working_hours,
